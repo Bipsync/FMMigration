@@ -1,7 +1,7 @@
 FMMigration
 ===========
 
-FMMigration is a schema migration for FMDB library written in Objective-C
+FMMigration is a schema migration for SQLite FMDB library written in Objective-C
 
 ## Installation
 
@@ -9,4 +9,4 @@ FMMigration is a schema migration for FMDB library written in Objective-C
 
 ## License
 
-The license for FMMigration is contained in the [license file](http://github.com/felipowsky/FMMigration/blob/master/LICENSE).
+The license for FMMigration is contained in the [license file](http://github.com/felipowsky/FMMigration/blob/master/LICENSE)
