@@ -6,16 +6,17 @@ FMMigration is a schema migration for SQLite FMDB library written in Objective-C
 ## Installation
 
 FMMigration depends of FMDB library to work. So first, configure the FMDB library into your Xcode project.
+
 After that, copy the files in [FMMigration folder](http://github.com/felipowsky/FMMigration/tree/master/FMMigration/FMMigration) into your project.
 
-It's done!
+You're ready to go!
 
 ## Usage
 
 To do a schema migration you need to instantiate a `FMMigrationManager` and setup a list of migrations.
-You should do this at the beginning of you application to ensure that your database will be updated to perform queries/statments properly.
+You should do this at the beginning of your application to ensure that the database will be updated to perform queries/statments properly.
 
-Each element in the list of migrations needs to be a instance of `FMMigration`.
+Each element in the list of migrations needs to be an instance of `FMMigration`.
 
 To execute the schema migration process you just call `migrateWithMigrations` method from `FMMigrationManager`.
 
@@ -28,7 +29,7 @@ Here is an example:
 							];
     [migration migrateWithMigrations:migrations];
 
-Notice that CreateTableAnimalMigration is a subclass of 'FMMigration' class.
+Notice that CreateTableAnimalMigration is a subclass of `FMMigration`.
 
 ## License
 
