@@ -63,7 +63,7 @@ Like this:
     [migration migrateWithMigrations:migrations];
 
 If you want to perform custom queries without the need to create a new subclass of `FMMigration` you can use `migrationWithUp` or `migrationWithUp:down` from `FMMigration`.
-In this case, don't forget that you need to return a 'NSArray' as a result for up and down operations.
+In this case, don't forget that you need to return a NSArray as a result for up and down operations.
 
 Here is an example:
 
