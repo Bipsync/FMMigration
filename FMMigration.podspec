@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.homepage = 'https://github.com/felipowsky/FMMigration'
   s.authors  = { 'Felipe Augusto' => '' }
   s.source   = { :git => 'https://github.com/felipowsky/FMMigration.git', :tag => "v#{s.version}" }
-  s.source_files = 'FMMigration/FMMigration/*.{h,m}', 'FMMigration/fmdb/*.{h,m}'
+  s.source_files = 'FMMigration/FMMigration/*.{h,m}'
   s.requires_arc = true
 
   s.ios.deployment_target = '7.0'
