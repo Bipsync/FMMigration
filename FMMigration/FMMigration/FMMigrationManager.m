@@ -53,7 +53,7 @@ static FMMigrationManager *instance = nil;
     
     if (migrations.count > version) {
         
-        NSLog(@"Starting schema migration (version %d to %d)...", version, migrations.count);
+        NSLog(@"Starting schema migration (version %d to %lu)...", version, migrations.count);
         
         BOOL fail = NO;
         
@@ -317,18 +317,19 @@ static FMMigrationManager *instance = nil;
         NSMutableArray *newColumnNames = [[NSMutableArray alloc] init];
         NSMutableArray *selectOldColumns = [[NSMutableArray alloc] init];
         
-        int indexRename = NSNotFound;
+        unsigned long indexRename = NSNotFound;
         
         for (int i = 0; i < columnSQLs.count; i++) {
             NSString *columnSQL = [columnSQLs objectAtIndex:i];
             NSString *columnSQLTrimmed = [columnSQL stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            NSString *columnName = [self columnNameForString:columnSQLTrimmed];
             
             BOOL foundSpecialName = NO;
             
             for (int j = 0; j < specialNames.count && !foundSpecialName; j++) {
                 NSString *specialName = [specialNames objectAtIndex:j];
                 
-                if ([[columnSQLTrimmed uppercaseString] isEqualToString:specialName]) {
+                if ([[columnName uppercaseString] isEqualToString:specialName]) {
                     foundSpecialName = YES;
                 }
             }
@@ -413,18 +414,19 @@ static FMMigrationManager *instance = nil;
         
         NSMutableArray *newColumnNames = [[NSMutableArray alloc] init];
         
-        int indexRemove = NSNotFound;
+        unsigned long indexRemove = NSNotFound;
         
         for (int i = 0; i < columnSQLs.count; i++) {
             NSString *columnSQL = [columnSQLs objectAtIndex:i];
             NSString *columnSQLTrimmed = [columnSQL stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            NSString *columnName = [self columnNameForString:columnSQLTrimmed];
             
             BOOL foundSpecialName = NO;
             
             for (int j = 0; j < specialNames.count && !foundSpecialName; j++) {
                 NSString *specialName = [specialNames objectAtIndex:j];
                 
-                if ([[columnSQLTrimmed uppercaseString] isEqualToString:specialName]) {
+                if ([[columnName uppercaseString] isEqualToString:specialName]) {
                     foundSpecialName = YES;
                 }
             }
