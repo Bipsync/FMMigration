@@ -53,7 +53,7 @@ static FMMigrationManager *instance = nil;
     
     if (migrations.count > version) {
         
-        NSLog(@"Starting schema migration (version %d to %lu)...", version, migrations.count);
+        NSLog(@"Starting schema migration (version %d to %lu)...", version, (unsigned long) migrations.count);
         
         BOOL fail = NO;
         
