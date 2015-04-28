@@ -9,5 +9,7 @@ Pod::Spec.new do |s|
   s.source_files = 'FMMigration/FMMigration/*.{h,m}'
   s.requires_arc = true
 
+  s.dependency 'FMDB', '~> 2.5'
+
   s.ios.deployment_target = '7.0'
 end
