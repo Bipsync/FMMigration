@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.source_files = 'FMMigration/FMMigration/*.{h,m}'
   s.requires_arc = true
 
-  s.dependency 'FMDB', :git => 'https://github.com/robertmryan/fmdb.git'
+  s.dependency = 'FMDB', :git => 'https://github.com/robertmryan/fmdb.git'
 
   s.ios.deployment_target = '7.0'
 end
