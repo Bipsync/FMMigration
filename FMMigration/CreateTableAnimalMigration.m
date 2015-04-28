@@ -2,22 +2,26 @@
 
 @implementation CreateTableAnimalMigration
 
-- (NSArray *)upgradeWithDatabase:(FMDatabase *)database
+- (BOOL)upgradeWithDatabase:(FMDatabase *)database
 {
-    NSMutableArray *sqls = [[NSMutableArray alloc] init];
+    NSString *sql = @"CREATE TABLE IF NOT EXISTS animal (id INTEGER PRIMARY KEY AUTOINCREMENT, name text)";
     
-    [sqls addObject:@"CREATE TABLE IF NOT EXISTS animal (id INTEGER PRIMARY KEY AUTOINCREMENT, name text)"];
-    
-    for (int i = 0; i < 10; i++) {
-        [sqls addObject:[NSString stringWithFormat:@"INSERT INTO animal (name) VALUES ('Animal %d')", i + 1]];
+    if (![database executeUpdate:sql]) {
+        return NO;
     }
     
-    return sqls;
+    for (int i = 0; i < 10; i++) {
+        if (![database executeUpdate:@"INSERT INTO animal (name) VALUES (?)", [NSString stringWithFormat:@"Animal %d", i + 1]]) {
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
-- (NSArray *)downgradeWithDatabase:(FMDatabase *)database
+- (BOOL)downgradeWithDatabase:(FMDatabase *)database
 {
-    return @[@"DROP TABLE IF EXISTS animal"];
+    return [database executeUpdate:@"DROP TABLE IF EXISTS animal"];
 }
 
 @end

@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+
 #import "FMMigrationManager.h"
 #import "FMDatabase.h"
 
@@ -6,14 +7,14 @@
 
 @property (nonatomic, strong) FMDatabase *database;
 
-+ (instancetype)migrationWithUp:(NSArray *(^) (FMDatabase *))upBlock;
-+ (instancetype)migrationWithUp:(NSArray *(^) (FMDatabase *))upBlock down:(NSArray *(^) (FMDatabase *))downBlock;
-- (id)initWithUp:(NSArray *(^) (FMDatabase *))upBlock;
-- (id)initWithUp:(NSArray *(^) (FMDatabase *))upBlock down:(NSArray *(^) (FMDatabase *))downBlock;
++ (instancetype)migrationWithUp:(BOOL (^) (FMDatabase *))upBlock;
++ (instancetype)migrationWithUp:(BOOL (^) (FMDatabase *))upBlock down:(BOOL (^) (FMDatabase *))downBlock;
+- (id)initWithUp:(BOOL (^) (FMDatabase *))upBlock;
+- (id)initWithUp:(BOOL (^) (FMDatabase *))upBlock down:(BOOL (^) (FMDatabase *))downBlock;
 
-- (NSArray *)up;
-- (NSArray *)down;
-- (NSArray *)upgradeWithDatabase:(FMDatabase *)database;
-- (NSArray *)downgradeWithDatabase:(FMDatabase *)database;
+- (BOOL)up;
+- (BOOL)down;
+- (BOOL)upgradeWithDatabase:(FMDatabase *)database;
+- (BOOL)downgradeWithDatabase:(FMDatabase *)database;
 
 @end

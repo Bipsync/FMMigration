@@ -1,7 +1,7 @@
 #import "FMMigration.h"
 
-typedef NSArray * (^UpBlock)(FMDatabase *);
-typedef NSArray * (^DownBlock)(FMDatabase *);
+typedef BOOL (^UpBlock)(FMDatabase *);
+typedef BOOL (^DownBlock)(FMDatabase *);
 
 @interface FMMigration ()
 
@@ -12,12 +12,12 @@ typedef NSArray * (^DownBlock)(FMDatabase *);
 
 @implementation FMMigration
 
-+ (instancetype)migrationWithUp:(NSArray *(^) (FMDatabase *))upBlock
++ (instancetype)migrationWithUp:(BOOL (^) (FMDatabase *))upBlock
 {
     return [[FMMigration alloc] initWithUp:upBlock];
 }
 
-+ (instancetype)migrationWithUp:(NSArray *(^) (FMDatabase *))upBlock down:(NSArray *(^) (FMDatabase *))downBlock
++ (instancetype)migrationWithUp:(BOOL (^) (FMDatabase *))upBlock down:(BOOL (^) (FMDatabase *))downBlock
 {
     return [[FMMigration alloc] initWithUp:upBlock down:downBlock];
 }
@@ -28,31 +28,31 @@ typedef NSArray * (^DownBlock)(FMDatabase *);
     
     if (self) {
         self.upBlock = ^(FMDatabase *database) {
-            return @[];
+            return YES;
         };
         self.downBlock = ^(FMDatabase *database) {
-            return @[];
+            return YES;
         };
     }
     
     return self;
 }
 
-- (id)initWithUp:(NSArray * (^)(FMDatabase *))upBlock
+- (id)initWithUp:(BOOL (^)(FMDatabase *))upBlock
 {
     self = [super init];
     
     if (self) {
         self.upBlock = upBlock;
         self.downBlock = ^(FMDatabase *database) {
-            return @[];
+            return YES;
         };
     }
     
     return self;
 }
 
-- (id)initWithUp:(NSArray * (^)(FMDatabase *))upBlock down:(NSArray * (^)(FMDatabase *))downBlock
+- (id)initWithUp:(BOOL (^)(FMDatabase *))upBlock down:(BOOL (^)(FMDatabase *))downBlock
 {
     self = [super init];
     
@@ -64,24 +64,24 @@ typedef NSArray * (^DownBlock)(FMDatabase *);
     return self;
 }
 
-- (NSArray *)up
+- (BOOL)up
 {
     return self.upBlock(self.database);
 }
 
-- (NSArray *)down
+- (BOOL)down
 {
     return self.downBlock(self.database);
 }
 
-- (NSArray *)upgradeWithDatabase:(FMDatabase *)database
+- (BOOL)upgradeWithDatabase:(FMDatabase *)database
 {
     self.database = database;
     
     return [self up];
 }
 
-- (NSArray *)downgradeWithDatabase:(FMDatabase *)database
+- (BOOL)downgradeWithDatabase:(FMDatabase *)database
 {
     self.database = database;
     

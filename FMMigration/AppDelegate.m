@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 #import "FMMigration.h"
+#import "FMDatabaseAdditions.h"
 #import "CreateTableAnimalMigration.h"
 
 @implementation AppDelegate
@@ -17,15 +18,18 @@
                             [migration addColumn:@"name" type:@"text" forTable:@"person"],
                             [migration addColumn:@"age" type:@"integer" forTable:@"person"],
                             [migration addColumn:@"favorite" type:@"text" forTable:@"person"],
-                            [FMMigration migrationWithUp:^NSArray *(FMDatabase *database) {
-                                NSMutableArray *sqls = [[NSMutableArray alloc] init];
-                                
+                            [FMMigration migrationWithUp:^BOOL (FMDatabase *database) {
                                 for (int i = 0; i < 10; i++) {
-                                    [sqls addObject:[NSString stringWithFormat:@"INSERT INTO person (name) VALUES ('Person %d')", i + 1]];
-                                    [sqls addObject:[NSString stringWithFormat:@"INSERT INTO food (name) VALUES ('Food %d')", i + 1]];
+                                    if (![database executeUpdate:@"INSERT INTO person (name) VALUES (?)", [NSString stringWithFormat:@"Person %d", i + 1]]) {
+                                        return NO;
+                                    }
+                                    
+                                    if (![database executeUpdate:@"INSERT INTO food (name) VALUES (?)", [NSString stringWithFormat:@"Food %d", i + 1]]) {
+                                        return NO;
+                                    }
                                 }
                                 
-                                return [NSArray arrayWithArray:sqls];
+                                return YES;
                             }],
                             [migration renameColumn:@"favorite" to:@"favorite_color" forTable:@"person"],
                             [migration dropColumn:@"favorite_color" forTable:@"person"],

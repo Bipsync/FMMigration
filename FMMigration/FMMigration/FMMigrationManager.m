@@ -1,4 +1,5 @@
 #import "FMMigrationManager.h"
+
 #import "FMDatabase.h"
 #import "FMDatabaseAdditions.h"
 #import "FMMigration.h"
@@ -68,15 +69,7 @@ static FMMigrationManager *instance = nil;
             
             NSMutableString *migrationLog = [NSMutableString stringWithFormat:@"Schema migration version %d...", currentVersion];
             
-            NSArray *migrationSQLs = [migration upgradeWithDatabase:database];
-            
-            for (int j = 0; j < migrationSQLs.count && !fail; j++) {
-                NSString *migrationSQL = [migrationSQLs objectAtIndex:j];
-                
-                if (![database executeUpdate:migrationSQL]) {
-                    fail = YES;
-                }
-            }
+            fail = ![migration upgradeWithDatabase:database];
             
             if (!fail) {
                 NSString *increaseVersionSQL = [NSString stringWithFormat:@"UPDATE %@ SET version = ?", self.migrationTableName];
@@ -184,7 +177,7 @@ static FMMigrationManager *instance = nil;
 - (FMMigration *)executeSQL:(NSString *)sql
 {
     FMMigration *migration = [[FMMigration alloc] initWithUp:^(FMDatabase *database) {
-        return [[NSArray alloc] initWithObjects:sql, nil];
+        return [database executeUpdate:sql];
     }];
     
     return migration;
@@ -193,105 +186,129 @@ static FMMigrationManager *instance = nil;
 - (FMMigration *)createTable:(NSString *)tableName primaryKey:(NSString *)primaryKey
 {
     FMMigration *migration = [[FMMigration alloc] initWithUp:^(FMDatabase *database) {
-        return [self sqlsCreateTable:tableName primaryKey:primaryKey];
+        NSString *sql = [self sqlCreateTable:tableName primaryKey:primaryKey];
+        return [database executeUpdate:sql];
         
     } down:^(FMDatabase *database) {
-        return [self sqlsDropTable:tableName];
+        NSString *sql = [self sqlDropTable:tableName];
+        return [database executeUpdate:sql];
     }];
     
     return migration;
 }
 
-- (NSArray *)sqlsCreateTable:(NSString *)tableName primaryKey:(NSString *)primaryKey
+- (NSString *)sqlCreateTable:(NSString *)tableName primaryKey:(NSString *)primaryKey
 {
-    NSString *sql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ INTEGER PRIMARY KEY AUTOINCREMENT)", tableName, primaryKey];
-    
-    return [[NSArray alloc] initWithObjects:sql, nil];
+    return [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ INTEGER PRIMARY KEY AUTOINCREMENT)", tableName, primaryKey];
 }
 
 - (FMMigration *)createTable:(NSString *)tableName columns:(NSArray *)columns
 {
     FMMigration *migration = [[FMMigration alloc] initWithUp:^(FMDatabase *database) {
-        return [self sqlsCreateTable:tableName columns:columns];
+        NSString *sql = [self sqlCreateTable:tableName columns:columns];
+        return [database executeUpdate:sql];
         
     } down:^(FMDatabase *database) {
-        return [self sqlsDropTable:tableName];
+        NSString *sql = [self sqlDropTable:tableName];
+        return [database executeUpdate:sql];
     }];
     
     return migration;
 }
 
-- (NSArray *)sqlsCreateTable:(NSString *)tableName columns:(NSArray *)columns
+- (NSString *)sqlCreateTable:(NSString *)tableName columns:(NSArray *)columns
 {
     NSMutableString *sql = [NSMutableString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (", tableName];
     [sql appendString:[columns componentsJoinedByString:@","]];
     [sql appendString:@")"];
     
-    return [[NSArray alloc] initWithObjects:sql, nil];
+    return [NSString stringWithString:sql];
 }
 
 - (FMMigration *)renameTable:(NSString *)tableName to:(NSString *)newTableName
 {
     FMMigration *migration = [[FMMigration alloc] initWithUp:^(FMDatabase *database) {
-        return [self sqlsRenameTable:tableName to:newTableName];
+        NSString *sql = [self sqlRenameTable:tableName to:newTableName];
+        return [database executeUpdate:sql];
         
     } down:^(FMDatabase *database) {
-        return [self sqlsRenameTable:newTableName to:tableName];
+        NSString *sql = [self sqlRenameTable:newTableName to:tableName];
+        return [database executeUpdate:sql];
     }];
     
     return migration;
 }
 
-- (NSArray *)sqlsRenameTable:(NSString *)tableName to:(NSString *)newTableName
+- (NSString *)sqlRenameTable:(NSString *)tableName to:(NSString *)newTableName
 {
-    NSString *sql = [NSString stringWithFormat:@"ALTER TABLE %@ RENAME TO %@", tableName, newTableName];
-    
-    return [[NSArray alloc] initWithObjects:sql, nil];
+    return [NSString stringWithFormat:@"ALTER TABLE %@ RENAME TO %@", tableName, newTableName];
 }
 
 - (FMMigration *)dropTable:(NSString *)tableName
 {
     FMMigration *migration = [[FMMigration alloc] initWithUp:^(FMDatabase *database) {
-        return [self sqlsDropTable:tableName];
+        NSString *sql = [self sqlDropTable:tableName];
+        return [database executeUpdate:sql];
         
     }];
     
     return migration;
 }
 
-- (NSArray *)sqlsDropTable:(NSString *)tableName
+- (NSString *)sqlDropTable:(NSString *)tableName
 {
-    NSString *sql = [NSString stringWithFormat:@"DROP TABLE IF EXISTS %@", tableName];
-    
-    return [[NSArray alloc] initWithObjects:sql, nil];
+    return [NSString stringWithFormat:@"DROP TABLE IF EXISTS %@", tableName];
 }
 
 - (FMMigration *)addColumn:(NSString *)column type:(NSString *)type forTable:(NSString *)tableName
 {
     FMMigration *migration = [[FMMigration alloc] initWithUp:^(FMDatabase *database) {
-        return [self sqlsAddColumn:column type:(NSString *)type forTable:tableName];
+        NSString *sql = [self sqlAddColumn:column type:(NSString *)type forTable:tableName];
+        return [database executeUpdate:sql];
         
     } down:^(FMDatabase *database) {
-        return [self sqlDropColumn:column forTable:tableName database:database];
+        NSArray *sqls = [self sqlDropColumn:column forTable:tableName database:database];
+        
+        for (NSString *sql in sqls) {
+            if (![database executeUpdate:sql]) {
+                return NO;
+            }
+        }
+        
+        return YES;
     }];
     
     return migration;
 }
 
-- (NSArray *)sqlsAddColumn:(NSString *)column type:(NSString *)type forTable:(NSString *)tableName
+- (NSString *)sqlAddColumn:(NSString *)column type:(NSString *)type forTable:(NSString *)tableName
 {
-    NSString *sql = [NSString stringWithFormat:@"ALTER TABLE %@ ADD COLUMN %@", tableName, [NSString stringWithFormat:@"%@ %@", column, type]];
-    
-    return [[NSArray alloc] initWithObjects:sql, nil];
+    return [NSString stringWithFormat:@"ALTER TABLE %@ ADD COLUMN %@", tableName, [NSString stringWithFormat:@"%@ %@", column, type]];
 }
 
 - (FMMigration *)renameColumn:(NSString *)column to:(NSString *)newColumn forTable:(NSString *)tableName
 {
     FMMigration *migration = [[FMMigration alloc] initWithUp:^(FMDatabase *database) {
-        return [self sqlsRenameColumn:column to:newColumn forTable:tableName database:database];
+        NSArray *sqls = [self sqlsRenameColumn:column to:newColumn forTable:tableName database:database];
+        
+        for (NSString *sql in sqls) {
+            if (![database executeUpdate:sql]) {
+                return NO;
+            }
+        }
+        
+        return YES;
         
     } down:^(FMDatabase *database) {
-        return [self sqlsRenameColumn:newColumn to:column forTable:tableName database:database];
+        NSArray *sqls = [self sqlsRenameColumn:newColumn to:column forTable:tableName database:database];
+        
+        for (NSString *sql in sqls) {
+            if (![database executeUpdate:sql]) {
+                return NO;
+            }
+        }
+        
+        return YES;
     }];
     
     return migration;
@@ -390,7 +407,15 @@ static FMMigrationManager *instance = nil;
 - (FMMigration *)dropColumn:(NSString *)column forTable:(NSString *)tableName
 {
     FMMigration *migration = [[FMMigration alloc] initWithUp:^(FMDatabase *database) {
-        return [self sqlDropColumn:column forTable:tableName database:database];
+        NSArray *sqls = [self sqlDropColumn:column forTable:tableName database:database];
+        
+        for (NSString *sql in sqls) {
+            if (![database executeUpdate:sql]) {
+                return NO;
+            }
+        }
+        
+        return YES;
         
     }];
     
