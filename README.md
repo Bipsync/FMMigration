@@ -74,42 +74,49 @@ Here is an example:
                             [migration createTable:@"food" primaryKey:@"id"],
                             [migration addColumn:@"name" type:@"text" forTable:@"person"],
                             [migration addColumn:@"name" type:@"text" forTable:@"food"],
-                            [FMMigration migrationWithUp:^NSArray *(FMDatabase *database) {
-                                NSMutableArray *sqls = [[NSMutableArray alloc] init];
-                                
+                            [FMMigration migrationWithUp:^BOOL (FMDatabase *database) {
                                 for (int i = 0; i < 10; i++) {
-                                    [sqls addObject:[NSString stringWithFormat:@"INSERT INTO person (name) VALUES ('Person %d')", i + 1]];
-                                    [sqls addObject:[NSString stringWithFormat:@"INSERT INTO food (name) VALUES ('Food %d')", i + 1]];
+                                    if (![database executeUpdate:@"INSERT INTO person (name) VALUES (?)", [NSString stringWithFormat:@"Person %d", i + 1]]) {
+                                        return NO;
+                                    }
+                                    
+                                    if (![database executeUpdate:@"INSERT INTO food (name) VALUES (?)", [NSString stringWithFormat:@"Food %d", i + 1]]) {
+                                        return NO;
+                                    }
                                 }
                                 
-                                return [NSArray arrayWithArray:sqls];
+                                return YES;
                             }],
                             ];
     [migration migrateWithMigrations:migrations];
 
-Finally, if you really want to organize your schema migrations in classes, you need to create a subclass of `FMMigration` and override `upgradeWithDatabase` and `downgradeWithDatabase` for up and down operations, respectively.
+Finally, if you want to organize your schema migrations in classes, you need to create a subclass of `FMMigration` and override `upgradeWithDatabase` and `downgradeWithDatabase` for up and down operations, respectively.
 
 Here is CreateTableAnimalMigration's implementation example:
 
 	@implementation CreateTableAnimalMigration
 
-	- (NSArray *)upgradeWithDatabase:(FMDatabase *)database
-	{
-    	NSMutableArray *sqls = [[NSMutableArray alloc] init];
+	- (BOOL)upgradeWithDatabase:(FMDatabase *)database
+    {
+        NSString *sql = @"CREATE TABLE IF NOT EXISTS animal (id INTEGER PRIMARY KEY AUTOINCREMENT, name text)";
     
-    	[sqls addObject:@"CREATE TABLE IF NOT EXISTS animal (id INTEGER PRIMARY KEY AUTOINCREMENT, name text)"];
+        if (![database executeUpdate:sql]) {
+            return NO;
+        }
     
-    	for (int i = 0; i < 10; i++) {
-        	[sqls addObject:[NSString stringWithFormat:@"INSERT INTO animal (name) VALUES ('Animal %d')", i + 1]];
-    	}
+        for (int i = 0; i < 10; i++) {
+            if (![database executeUpdate:@"INSERT INTO animal (name) VALUES (?)", [NSString stringWithFormat:@"Animal %d", i + 1]]) {
+                return NO;
+            }
+        }
     
-    	return sqls;
-	}
+        return YES;
+    }
 
-	- (NSArray *)downgradeWithDatabase:(FMDatabase *)database
-	{
-    	return @[@"DROP TABLE IF EXISTS animal"];
-	}
+    - (BOOL)downgradeWithDatabase:(FMDatabase *)database
+    {
+        return [database executeUpdate:@"DROP TABLE IF EXISTS animal"];
+    }
 
 	@end
 
