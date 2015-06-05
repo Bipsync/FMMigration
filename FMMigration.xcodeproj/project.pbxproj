@@ -24,17 +24,8 @@
 		4ED7FA9518D875420052173B /* FMMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7FA9118D875420052173B /* FMMigration.m */; };
 		4ED7FA9618D875420052173B /* FMMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7FA9318D875420052173B /* FMMigrationManager.m */; };
 		4ED7FA9718D875420052173B /* FMMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7FA9318D875420052173B /* FMMigrationManager.m */; };
-		4ED7FAA418D875920052173B /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7FA9A18D875920052173B /* FMDatabase.m */; };
-		4ED7FAA518D875920052173B /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7FA9A18D875920052173B /* FMDatabase.m */; };
-		4ED7FAA618D875920052173B /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7FA9C18D875920052173B /* FMDatabaseAdditions.m */; };
-		4ED7FAA718D875920052173B /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7FA9C18D875920052173B /* FMDatabaseAdditions.m */; };
-		4ED7FAA818D875920052173B /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7FA9E18D875920052173B /* FMDatabasePool.m */; };
-		4ED7FAA918D875920052173B /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7FA9E18D875920052173B /* FMDatabasePool.m */; };
-		4ED7FAAA18D875920052173B /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7FAA018D875920052173B /* FMDatabaseQueue.m */; };
-		4ED7FAAB18D875920052173B /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7FAA018D875920052173B /* FMDatabaseQueue.m */; };
-		4ED7FAAC18D875920052173B /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7FAA318D875920052173B /* FMResultSet.m */; };
-		4ED7FAAD18D875920052173B /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7FAA318D875920052173B /* FMResultSet.m */; };
 		4ED7FAAF18D8775E0052173B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED7FAAE18D8775E0052173B /* libsqlite3.dylib */; };
+		D02D7A6F68BA0EF413CA9885 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AB2D2793AC0D2E00C82869 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,18 +61,10 @@
 		4ED7FA9118D875420052173B /* FMMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMMigration.m; sourceTree = "<group>"; };
 		4ED7FA9218D875420052173B /* FMMigrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMMigrationManager.h; sourceTree = "<group>"; };
 		4ED7FA9318D875420052173B /* FMMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMMigrationManager.m; sourceTree = "<group>"; };
-		4ED7FA9918D875920052173B /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
-		4ED7FA9A18D875920052173B /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
-		4ED7FA9B18D875920052173B /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		4ED7FA9C18D875920052173B /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		4ED7FA9D18D875920052173B /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
-		4ED7FA9E18D875920052173B /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
-		4ED7FA9F18D875920052173B /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
-		4ED7FAA018D875920052173B /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
-		4ED7FAA118D875920052173B /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
-		4ED7FAA218D875920052173B /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
-		4ED7FAA318D875920052173B /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		4ED7FAAE18D8775E0052173B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		58169A66C4865DB83E93BFA9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		58CF877C7BE1C16A7C057C58 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		65AB2D2793AC0D2E00C82869 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +76,7 @@
 				4ED7FA6118D871430052173B /* CoreGraphics.framework in Frameworks */,
 				4ED7FA6318D871430052173B /* UIKit.framework in Frameworks */,
 				4ED7FA5F18D871430052173B /* Foundation.framework in Frameworks */,
+				D02D7A6F68BA0EF413CA9885 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +93,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		143BF9C5883F8EADB9B8FD66 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				58CF877C7BE1C16A7C057C58 /* Pods.debug.xcconfig */,
+				58169A66C4865DB83E93BFA9 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		4ED7FA5218D871420052173B = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +109,7 @@
 				4ED7FA7D18D871430052173B /* FMMigrationTests */,
 				4ED7FA5D18D871430052173B /* Frameworks */,
 				4ED7FA5C18D871430052173B /* Products */,
+				143BF9C5883F8EADB9B8FD66 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,6 +130,7 @@
 				4ED7FA6018D871430052173B /* CoreGraphics.framework */,
 				4ED7FA6218D871430052173B /* UIKit.framework */,
 				4ED7FA7718D871430052173B /* XCTest.framework */,
+				65AB2D2793AC0D2E00C82869 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -147,7 +142,6 @@
 				4ED7FA6E18D871430052173B /* AppDelegate.m */,
 				4ECA9A0418D8A72E00D70BF9 /* CreateTableAnimalMigration.h */,
 				4ECA9A0518D8A72E00D70BF9 /* CreateTableAnimalMigration.m */,
-				4ED7FA9818D875920052173B /* fmdb */,
 				4ED7FA8F18D875420052173B /* FMMigration */,
 				4ED7FA7018D871430052173B /* Images.xcassets */,
 				4ED7FA6518D871430052173B /* Supporting Files */,
@@ -195,24 +189,6 @@
 			path = FMMigration;
 			sourceTree = "<group>";
 		};
-		4ED7FA9818D875920052173B /* fmdb */ = {
-			isa = PBXGroup;
-			children = (
-				4ED7FA9918D875920052173B /* FMDatabase.h */,
-				4ED7FA9A18D875920052173B /* FMDatabase.m */,
-				4ED7FA9B18D875920052173B /* FMDatabaseAdditions.h */,
-				4ED7FA9C18D875920052173B /* FMDatabaseAdditions.m */,
-				4ED7FA9D18D875920052173B /* FMDatabasePool.h */,
-				4ED7FA9E18D875920052173B /* FMDatabasePool.m */,
-				4ED7FA9F18D875920052173B /* FMDatabaseQueue.h */,
-				4ED7FAA018D875920052173B /* FMDatabaseQueue.m */,
-				4ED7FAA118D875920052173B /* FMDB.h */,
-				4ED7FAA218D875920052173B /* FMResultSet.h */,
-				4ED7FAA318D875920052173B /* FMResultSet.m */,
-			);
-			path = fmdb;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -220,9 +196,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4ED7FA8718D871430052173B /* Build configuration list for PBXNativeTarget "FMMigration" */;
 			buildPhases = (
+				228A41940D95B0D96A238FA5 /* Check Pods Manifest.lock */,
 				4ED7FA5718D871420052173B /* Sources */,
 				4ED7FA5818D871420052173B /* Frameworks */,
 				4ED7FA5918D871420052173B /* Resources */,
+				507310E921374D8A7569BC3E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -303,20 +281,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		228A41940D95B0D96A238FA5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		507310E921374D8A7569BC3E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4ED7FA5718D871420052173B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				4ED7FA9418D875420052173B /* FMMigration.m in Sources */,
-				4ED7FAAA18D875920052173B /* FMDatabaseQueue.m in Sources */,
 				4ED7FA6F18D871430052173B /* AppDelegate.m in Sources */,
 				4ED7FA6B18D871430052173B /* main.m in Sources */,
-				4ED7FAA418D875920052173B /* FMDatabase.m in Sources */,
-				4ED7FAA818D875920052173B /* FMDatabasePool.m in Sources */,
-				4ED7FAAC18D875920052173B /* FMResultSet.m in Sources */,
 				4ED7FA9618D875420052173B /* FMMigrationManager.m in Sources */,
-				4ED7FAA618D875920052173B /* FMDatabaseAdditions.m in Sources */,
 				4ECA9A0618D8A72E00D70BF9 /* CreateTableAnimalMigration.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,13 +332,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4ED7FA8418D871430052173B /* FMMigrationTests.m in Sources */,
-				4ED7FAA918D875920052173B /* FMDatabasePool.m in Sources */,
 				4ED7FA9718D875420052173B /* FMMigrationManager.m in Sources */,
-				4ED7FAAB18D875920052173B /* FMDatabaseQueue.m in Sources */,
 				4ED7FA9518D875420052173B /* FMMigration.m in Sources */,
-				4ED7FAA518D875920052173B /* FMDatabase.m in Sources */,
-				4ED7FAAD18D875920052173B /* FMResultSet.m in Sources */,
-				4ED7FAA718D875920052173B /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +441,7 @@
 		};
 		4ED7FA8818D871430052173B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58CF877C7BE1C16A7C057C58 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -456,6 +458,7 @@
 		};
 		4ED7FA8918D871430052173B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58169A66C4865DB83E93BFA9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
