@@ -1,5 +1,6 @@
-FMMigration
-===========
+# FMMigration
+
+[![Build Status][travis-image]][travis-url] [![version][cocoapods-version]][cocoapods-url] [![License][cocoapods-license]][license-url]
 
 FMMigration is a schema migration for SQLite FMDB library written in Objective-C
 
@@ -79,12 +80,12 @@ Here is an example:
                                     if (![database executeUpdate:@"INSERT INTO person (name) VALUES (?)", [NSString stringWithFormat:@"Person %d", i + 1]]) {
                                         return NO;
                                     }
-                                    
+
                                     if (![database executeUpdate:@"INSERT INTO food (name) VALUES (?)", [NSString stringWithFormat:@"Food %d", i + 1]]) {
                                         return NO;
                                     }
                                 }
-                                
+
                                 return YES;
                             }],
                             ];
@@ -99,17 +100,17 @@ Here is CreateTableAnimalMigration's implementation example:
 	- (BOOL)upgradeWithDatabase:(FMDatabase *)database
     {
         NSString *sql = @"CREATE TABLE IF NOT EXISTS animal (id INTEGER PRIMARY KEY AUTOINCREMENT, name text)";
-    
+
         if (![database executeUpdate:sql]) {
             return NO;
         }
-    
+
         for (int i = 0; i < 10; i++) {
             if (![database executeUpdate:@"INSERT INTO animal (name) VALUES (?)", [NSString stringWithFormat:@"Animal %d", i + 1]]) {
                 return NO;
             }
         }
-    
+
         return YES;
     }
 
