@@ -124,3 +124,6 @@ Here is CreateTableAnimalMigration's implementation example:
 ## License
 
 The license for FMMigration is contained in the [license file](http://github.com/felipowsky/FMMigration/blob/master/LICENSE)
+
+[travis-url]:  https://travis-ci.org/felipowsky/FMMigration
+[travis-image]: https://travis-ci.org/felipowsky/FMMigration.svg?style=flat
