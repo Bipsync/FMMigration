@@ -1,6 +1,6 @@
 # FMMigration
 
-[![Build Status][travis-image]][travis-url] [![version][cocoapods-version]][cocoapods-url] [![License][cocoapods-license]][license-url]
+[![Build Status][travis-image]][travis-url]
 
 FMMigration is a schema migration for SQLite FMDB library written in Objective-C
 
