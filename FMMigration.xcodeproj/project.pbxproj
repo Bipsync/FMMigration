@@ -25,7 +25,7 @@
 		4ED7FA9618D875420052173B /* FMMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7FA9318D875420052173B /* FMMigrationManager.m */; };
 		4ED7FA9718D875420052173B /* FMMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7FA9318D875420052173B /* FMMigrationManager.m */; };
 		4ED7FAAF18D8775E0052173B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED7FAAE18D8775E0052173B /* libsqlite3.dylib */; };
-		D02D7A6F68BA0EF413CA9885 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AB2D2793AC0D2E00C82869 /* libPods.a */; };
+		DECB59A54576287B467803E7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32A56B2049381CD05A38FE6 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +64,7 @@
 		4ED7FAAE18D8775E0052173B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		58169A66C4865DB83E93BFA9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		58CF877C7BE1C16A7C057C58 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		65AB2D2793AC0D2E00C82869 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C32A56B2049381CD05A38FE6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +76,7 @@
 				4ED7FA6118D871430052173B /* CoreGraphics.framework in Frameworks */,
 				4ED7FA6318D871430052173B /* UIKit.framework in Frameworks */,
 				4ED7FA5F18D871430052173B /* Foundation.framework in Frameworks */,
-				D02D7A6F68BA0EF413CA9885 /* libPods.a in Frameworks */,
+				DECB59A54576287B467803E7 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,7 +130,7 @@
 				4ED7FA6018D871430052173B /* CoreGraphics.framework */,
 				4ED7FA6218D871430052173B /* UIKit.framework */,
 				4ED7FA7718D871430052173B /* XCTest.framework */,
-				65AB2D2793AC0D2E00C82869 /* libPods.a */,
+				C32A56B2049381CD05A38FE6 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -201,6 +201,7 @@
 				4ED7FA5818D871420052173B /* Frameworks */,
 				4ED7FA5918D871420052173B /* Resources */,
 				507310E921374D8A7569BC3E /* Copy Pods Resources */,
+				BB5D61C24D96F03FBBF77A72 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -235,7 +236,7 @@
 		4ED7FA5318D871420052173B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Felipe Augusto";
 				TargetAttributes = {
 					4ED7FA7518D871430052173B = {
@@ -312,6 +313,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BB5D61C24D96F03FBBF77A72 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -385,6 +401,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -451,6 +468,7 @@
 				GCC_PREFIX_HEADER = "FMMigration/FMMigration-Prefix.pch";
 				INFOPLIST_FILE = "FMMigration/FMMigration-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.felipowsky.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -468,6 +486,7 @@
 				GCC_PREFIX_HEADER = "FMMigration/FMMigration-Prefix.pch";
 				INFOPLIST_FILE = "FMMigration/FMMigration-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.felipowsky.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -489,6 +508,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "FMMigrationTests/FMMigrationTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pantas.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -507,6 +527,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FMMigration/FMMigration-Prefix.pch";
 				INFOPLIST_FILE = "FMMigrationTests/FMMigrationTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pantas.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
