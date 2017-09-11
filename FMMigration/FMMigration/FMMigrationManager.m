@@ -1,6 +1,7 @@
 #import "FMMigrationManager.h"
 
-#import "FMDatabase.h"
+#import <FMDB/FMDB.h>
+#import <sqlite3.h>
 #import "FMDatabaseAdditions.h"
 #import "FMMigration.h"
 
@@ -41,9 +42,14 @@ static FMMigrationManager *instance = nil;
 
 - (BOOL)migrateWithMigrations:(NSArray *)migrations
 {
+    return [self migrateWithMigrations:migrations flags:SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE];
+}
+
+- (BOOL)migrateWithMigrations:(NSArray *)migrations flags:(int)flags
+{
     FMDatabase *database = [FMDatabase databaseWithPath:self.databasePath];
     
-    if (![database open]) {
+    if (![database openWithFlags:flags]) {
         NSLog(@"Could not open database: %@", database.lastErrorMessage);
         return NO;
     }

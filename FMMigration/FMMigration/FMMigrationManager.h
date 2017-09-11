@@ -7,6 +7,7 @@
 - (id)initWithDatabasePath:(NSString *)databasePath;
 - (id)initWithDatabasePath:(NSString *)databasePath migrationTable:(NSString *)migrationTableName;
 - (BOOL)migrateWithMigrations:(NSArray *)migrations;
+- (BOOL)migrateWithMigrations:(NSArray *)migrations flags:(int)flags;
 - (FMMigration *)executeSQL:(NSString *)sql;
 - (FMMigration *)createTable:(NSString *)tableName primaryKey:(NSString *)primaryKey;
 - (FMMigration *)createTable:(NSString *)tableName columns:(NSArray *)columns;
